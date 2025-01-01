@@ -17,6 +17,7 @@ export default function Home() {
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [commentsLoading, setCommentsLoading] = useState(false);
   const router = useRouter();
  
   useEffect(() => {
@@ -33,7 +34,25 @@ export default function Home() {
     };
     checkAuth();
   }, [router]);
+  const getTweets = async () => {
+    try {
+      const userID = await account.get()
+      const response = await database.listDocuments(
+        '6774c0ea003be44e7108',
+        '6774c0f3000a5eb102a8',
+        [
+          Query.limit(5),
+          Query.equal("user", userID.$id),
+          Query.orderDesc("$createdAt")
+        ]
 
+      );
+      console.log(response.documents)
+      setTweets(response.documents);
+    } catch (error) {
+      console.error('Error fetching tweets:', error);
+    }
+  };
   const handleTweetSubmit = async (content) => {
     try {
       const userId = await account.get()
@@ -47,9 +66,10 @@ export default function Home() {
         }
         
       );
-
+setCommentsLoading(true);
       await reply(response.$id, response.post);
-      setTweets((prevTweets) => [response, ...prevTweets]);
+      setCommentsLoading(false);
+      getTweets();      
     } catch (error) {
       console.error('Error submitting tweet:', error);
     }
@@ -60,25 +80,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const getTweets = async () => {
-      try {
-        const userID = await account.get()
-        const response = await database.listDocuments(
-          '6774c0ea003be44e7108',
-          '6774c0f3000a5eb102a8',
-          [
-            Query.limit(5),
-            Query.equal("user", userID.$id),
-            Query.orderDesc("$createdAt")
-          ]
 
-        );
-        console.log(response.documents)
-        setTweets(response.documents);
-      } catch (error) {
-        console.error('Error fetching tweets:', error);
-      }
-    };
     getTweets();
   }, []);
 
@@ -111,6 +113,11 @@ export default function Home() {
         </header>
         <div className="p-4">
           <TweetInput onTweetSubmit={handleTweetSubmit} />
+          {commentsLoading && (
+            <div className="flex items-center justify-center">
+              <ClipLoader color="#ffffff" loading={commentsLoading} size={20} />
+            </div>
+          )}
           <div className="mt-8 space-y-4">
             {tweets.map((tweet) => (
               <Tweet
