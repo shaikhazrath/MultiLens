@@ -7,12 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-
+import { useRouter } from 'next/router';
 const Page = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState('');
+    const router = useRouter();
 
     const handleRegisterOrLogin = async (e) => {
         e.preventDefault();
@@ -21,12 +22,14 @@ const Page = () => {
 
         try {
             await account.createEmailPasswordSession(email, password);
+            router.push('/');
             setError('');
         } catch (loginError) {
             if (loginError.code === 401) { // Unauthorized, user not found
                 try {
                     await account.create(ID.unique(), email, password);
                     await account.createEmailPasswordSession(email, password);
+                    router.push('/');
                     setError('');
                 } catch (registerError) {
                     setError(registerError.message);
