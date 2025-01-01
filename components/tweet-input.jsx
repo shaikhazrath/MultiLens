@@ -27,12 +27,8 @@ export default function TweetInput({
   const isOverLimit = charsLeft < 0
 
   return (
-    (<div className="bg-background rounded-lg shadow p-4 ">
+    (<div className=" rounded-lg shadow  ">
       <div className="flex space-x-4">
-        <Avatar className="w-10 h-10 hidden sm:block">
-          <AvatarImage src="/placeholder.svg?height=40&width=40" alt="User" />
-          <AvatarFallback>U</AvatarFallback>
-        </Avatar>
         <div className="flex-1 space-y-4">
           <Textarea
             placeholder={placeholder}

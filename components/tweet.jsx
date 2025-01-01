@@ -47,14 +47,14 @@ export default function Tweet({
   return (
     <div className="border-border p-4 transition-colors duration-200" key={id}>
       <div className="flex space-x-3">
-        <Avatar className="w-10 h-10 hidden sm:block">
+        <Avatar className="w-10 h-10">
           <AvatarImage src="/placeholder.svg?height=40&width=40" alt="User" />
           <AvatarFallback>U</AvatarFallback>
         </Avatar>
         <div className="flex-1 min-w-0">
           <div className="flex items-center space-x-2 mb-1">
             {character ? (
-              <span className="font-bold text-primary truncate">
+              <span className="font-bold text-sm truncate">
                 Bot
                 <span className="pl-2 text-sm text-muted-foreground">
                   ({character})
@@ -63,11 +63,12 @@ export default function Tweet({
             ) : (
               <span className="font-bold text-primary truncate">User</span>
             )}
-            <span className="text-muted-foreground text-sm truncate">
-              {formatDistanceToNow(timestamp, { addSuffix: true })}
-            </span>
+           
           </div>
           <p className="text-primary break-words">{content}</p>
+          <span className="text-muted-foreground text-sm truncate">
+              {formatDistanceToNow(timestamp)}
+            </span>
 
           <div className="mt-4 space-y-4 pl-4 sm:pl-6 border-l border-border">
             {showAllComments
