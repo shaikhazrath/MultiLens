@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 const Page = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
