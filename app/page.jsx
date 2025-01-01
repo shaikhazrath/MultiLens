@@ -1,17 +1,18 @@
 'use client';
-import { use, useEffect, useState } from 'react';
+import { use, useEffect, useState,CSSProperties  } from 'react';
 import TweetInput from '@/components/tweet-input';
 import Tweet from '@/components/tweet';
 import { client, database, ID, account,Query } from '@/lib/appwrite';
 import { reply } from '@/lib/bots';
 import { useRouter } from 'next/navigation';
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Home() {
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
-
+ 
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -76,7 +77,11 @@ export default function Home() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <ClipLoader color="#ffffff" loading={loading} size={150} />
+      </div>
+    );
   }
 
   return (
