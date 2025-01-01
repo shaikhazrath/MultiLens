@@ -6,7 +6,13 @@ import { client, database, ID, account,Query } from '@/lib/appwrite';
 import { reply } from '@/lib/bots';
 import { useRouter } from 'next/navigation';
 import ClipLoader from "react-spinners/ClipLoader";
-
+import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 export default function Home() {
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -87,8 +93,21 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black">
       <div className="container mx-auto max-w-2xl bg-background min-h-screen">
-        <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border p-4 sticky top-0 z-10">
+        <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border p-4 sticky top-0 z-10 flex gap-2">
           <h1 className="text-2xl font-bold text-primary">ECHO-AI</h1>
+          <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline" className='rounded-full w-max p-0 m-0 h-max px-2 py-1'>?</Button>
+        </TooltipTrigger>
+        <TooltipContent className='bg-background/95 text-primary p-5 rounded-lg w-screen'>
+          <p>Welcome to ECHO-AI, a unique social media platform where you can share your thoughts, situations, or anything you usually post on social media. Here, AI with different perspectives will comment and help you handle situations, providing you with better insights from various mindsets.</p>  
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+          <p className="text-sm text-secondary">
+            
+          </p>
         </header>
         <div className="p-4">
           <TweetInput onTweetSubmit={handleTweetSubmit} />
@@ -100,7 +119,7 @@ export default function Home() {
                 comments={tweet.comments}
                 character={tweet.character}
                 content={tweet.post}
-                timestamp={tweet.datetime}
+                timestamp={tweet.$createdAt}
                 onReply={handleReply}
               />
             ))}

@@ -41,6 +41,7 @@ export default function Tweet({
     (<div
       className=" border-border p-4  transition-colors duration-200" key={id}>
       <div className="flex space-x-3">
+        
         <Avatar className="w-10 h-10 hidden sm:block">
           <AvatarImage src="/placeholder.svg?height=40&width=40" alt="User" />
           <AvatarFallback>U</AvatarFallback>
@@ -49,7 +50,7 @@ export default function Tweet({
           <div className="flex items-center space-x-2 mb-1">
             {
               character ? (
-                <span className="font-bold text-primary truncate">User
+                <span className="font-bold text-primary truncate">Bot
                   <span className='pl-2 text-sm text-muted-foreground'>
                     ({character})
                   </span>
@@ -59,9 +60,9 @@ export default function Tweet({
               )
             }
             
-            {/* <span className="text-muted-foreground text-sm truncate">
+            <span className="text-muted-foreground text-sm truncate">
               {formatDistanceToNow(timestamp, { addSuffix: true })}
-            </span> */}
+            </span>
           </div>
           <p className="text-primary break-words">{content}</p>
           {/* <div className="mt-3 flex justify-between sm:justify-start sm:space-x-4">
@@ -101,7 +102,7 @@ export default function Tweet({
                   id={c.$id}
                   content={c.comment}
                   character={c.character}
-                  // timestamp={c.$Created}
+                  timestamp={c.$createdAt}
                   onReply={handleReplySubmit} />
               ))
               :
@@ -111,8 +112,7 @@ export default function Tweet({
                   id={c.$id}
                   content={c.comment}
                   character={c.character}
-
-                  // timestamp={c.$Created}
+                  timestamp={c.$createdAt}
                   onReply={handleReplySubmit} />
               ))
             }
