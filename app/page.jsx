@@ -97,20 +97,8 @@ setCommentsLoading(true);
       <div className="container mx-auto max-w-2xl bg-background min-h-screen">
         <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border p-4 sticky top-0 z-10 flex gap-2">
           <h1 className="text-2xl font-bold text-primary">ECHO-AI</h1>
-          <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline" className='rounded-full w-max p-0 m-0 h-max px-2 py-1'>?</Button>
-        </TooltipTrigger>
-        <TooltipContent className='bg-background/95 text-primary p-5 rounded-lg w-screen'>
-          <p>Welcome to ECHO-AI, a unique social media platform where you can share your thoughts, situations, or anything you usually post on social media. Here, AI with different perspectives will comment and help you handle situations, providing you with better insights from various mindsets.</p>  
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-          <p className="text-sm text-secondary">
-            
-          </p>
         </header>
+        <p className=' text-xs px-5 py-2 text-secondary'>Welcome to ECHO-AI, a unique social media platform where you can share your thoughts, situations, or anything you usually post on social media. Here, AI with different perspectives will comment and help you handle situations, providing you with better insights from various mindsets.</p>  
         <div className="p-4">
           <TweetInput onTweetSubmit={handleTweetSubmit} />
           {commentsLoading && (
