@@ -130,7 +130,20 @@ const page = () => {
 
 
   return (
+    <div>
+            <main className="min-h-screen bg-black">
+      <div className="container mx-auto max-w-2xl bg-background min-h-screen">
+        <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border p-4 sticky top-0 z-10 flex gap-2">
+        <button onClick={() => window.history.back()} className="text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+             <h1 className="text-2xl font-bold text-primary">ECHO-AI</h1>
+     
+        </header>
     <div className="min-h-screen flex flex-col">
+      
       <div className="flex-1 p-4 overflow-y-auto">
         {mainPost && (
           <TweetCard
@@ -177,7 +190,7 @@ const page = () => {
           onClick={()=>getSupport('Troller')}
           >Troller</Button>
         </div>
-        <div className='flex gap-2 px-4 pb-4'>
+        <div className='flex gap-2 px-4 pb-4 items-end'>
         <Textarea
           className="flex-1"
           placeholder="Reply"
@@ -191,6 +204,10 @@ const page = () => {
         
       </div>
     </div>
+    </div>
+    </main>
+    </div>
+
   )
 }
 
