@@ -178,7 +178,7 @@ const page = () => {
             </div>
             <div className=" border-t border-gray-200 sticky bottom-0 bg-black">
               <div className='p-2 flex gap-2'>
-                <Button onClick={() => getSupport('supportive friend')}>supportive friend</Button>
+                <Button onClick={() => getSupport('supportive friend')}></Button>
                 <Button onClick={() => getSupport('indian Uncle')}>indian Uncle</Button>
                 <Button onClick={() => getSupport('sarcastic bully')}>Sarcastic Bully</Button>
               </div>
