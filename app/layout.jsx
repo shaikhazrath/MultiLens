@@ -12,14 +12,15 @@ export default function RootLayout({
   children
 }) {
   return (
-    (<html lang="en" className="dark">
-
-      <body className={inter.className}>
-
-        {children}
-     
-        </body>
-    </html>)
+    <html lang="en" className="dark">
+      <body className={`${inter.className} flex items-center justify-center min-h-screen bg-gray-900 text-white`}>
+        <div className="text-center p-6 bg-gray-800 rounded-lg shadow-lg">
+          <h1 className="text-4xl font-bold mb-4">Site Temporarily Unavailable</h1>
+          <p className="text-lg mb-4">Due to high traffic, the site is temporarily unavailable. Please check back later.</p>
+          <p className="text-sm text-gray-400">We apologize for the inconvenience and appreciate your patience.</p>
+        </div>
+      </body>
+    </html>
   );
 }
 

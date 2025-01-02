@@ -1,9 +1,20 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MessageCircle, Repeat, Heart, Bookmark } from 'lucide-react';
 import { formatDistance, formatDistanceToNow } from 'date-fns';
+import { account } from '@/lib/appwrite';
 
 const TweetCard = ({user,timestamp,post,id}) => {
+    const [u,setU] = React.useState(u)
+    useEffect(() => {
+        const fetchUser = async ()=>{
+            if(user == 'user'){
+                const aa = await account.get()
+                setU(aa.email.split('@')[0])
+             }
+        }
+        fetchUser()
+    }   ,[])
     return (
         <div className=' p-4'>
             <div className='flex space-x-3 items-start'>
@@ -16,7 +27,7 @@ const TweetCard = ({user,timestamp,post,id}) => {
        
                 <div className='flex-1'>
                     <div className='flex items-center space-x-2'>
-                        <h1 className='text-md font-bold'>{user == 'user' ? 'hazrath':'Ai'}</h1>
+                        <h1 className='text-md font-bold'>{user == 'user' ? u:'Ai'}</h1>
                         <span className='text-sm text-gray-500'>({user}) · {formatDistanceToNow(timestamp)}</span>
                     </div>
                     <p className='mt-1 text-white'>
