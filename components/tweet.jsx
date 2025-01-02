@@ -7,7 +7,7 @@ import { MessageCircle, Heart, Repeat2, Star } from 'lucide-react'
 import TweetInput from './tweet-input'
 import { database, Query } from '@/lib/appwrite';
 import { motion } from 'framer-motion';
-
+import { useRouter } from 'next/navigation';
 export default function Tweet({
   id,
   content,
@@ -20,7 +20,7 @@ export default function Tweet({
   const [replies, setReplies] = useState([])
 
   const [showAllComments, setShowAllComments] = useState(false);
-
+  const router = useRouter();
   const handleShowAllComments = () => {
     setShowAllComments(true);
   };
@@ -63,51 +63,72 @@ export default function Tweet({
             ) : (
               <span className="font-bold text-primary truncate">User</span>
             )}
-           
+
           </div>
           <p className="text-primary break-words">{content}</p>
           <span className="text-muted-foreground text-sm truncate">
-              {formatDistanceToNow(timestamp)}
-            </span>
+            {formatDistanceToNow(timestamp)}
+          </span>
+          <div>
+            {
+              character &&
+<div className="flex space-x-4 mt-2">
+              <Button variant="ghost" size="icon" aria-label="Reply" onClick={()=>router.push(`/reply/${id}`)}>
+                <MessageCircle className="w-4 h-4" />
+              </Button>
+              <Button variant="ghost" size="icon" aria-label="Like">
+                <Heart className="w-4 h-4" />
+              </Button>
+              <Button variant="ghost" size="icon" aria-label="Retweet">
+                <Repeat2 className="w-4 h-4" />
+              </Button>
+              <Button variant="ghost" size="icon" aria-label="Bookmark">
+                <Star className="w-4 h-4" />
+              </Button>
+            </div>
+              
+            }
+            
+          </div>
 
           <div className="mt-4 space-y-4 pl-4 sm:pl-6 border-l border-border">
             {showAllComments
               ? comments &&
-                comments.map((c, index) => (
-                  <motion.div
-                    key={c.$id}
-                    initial="hidden"
-                    animate="visible"
-                    variants={commentVariants}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Tweet
-                      id={c.$id}
-                      content={c.comment}
-                      character={c.character}
-                      timestamp={c.$createdAt}
-                      onReply={handleReplySubmit}
-                    />
-                  </motion.div>
-                ))
+              comments.map((c, index) => (
+                <motion.div
+                  key={c.$id}
+                  initial="hidden"
+                  animate="visible"
+                  variants={commentVariants}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Tweet
+                    id={c.$id}
+                    content={c.comment}
+                    character={c.character}
+                    timestamp={c.$createdAt}
+                    onReply={handleReplySubmit}
+                  />
+                </motion.div>
+              ))
               : comments &&
-                comments.slice(0, 2).map((c, index) => (
-                  <motion.div
-                    key={c.$id}
-                    initial="hidden"
-                    animate="visible"
-                    variants={commentVariants}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Tweet
-                      id={c.$id}
-                      content={c.comment}
-                      character={c.character}
-                      timestamp={c.$createdAt}
-                      onReply={handleReplySubmit}
-                    />
-                  </motion.div>
-                ))}
+              comments.slice(0, 2).map((c, index) => (
+                <motion.div
+                  key={c.$id}
+                  initial="hidden"
+                  animate="visible"
+                  variants={commentVariants}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Tweet
+                    id={c.$id}
+                    content={c.comment}
+                    character={c.character}
+                    timestamp={c.$createdAt}
+                    onReply={handleReplySubmit}
+                  />
+                </motion.div>
+              ))}
             {comments && comments.length > 2 && !showAllComments && (
               <button
                 onClick={handleShowAllComments}

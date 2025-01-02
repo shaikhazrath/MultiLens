@@ -72,6 +72,8 @@ setCommentsLoading(true);
       getTweets();      
     } catch (error) {
       console.error('Error submitting tweet:', error);
+      setCommentsLoading(false);
+
     }
   };
 
@@ -93,11 +95,7 @@ setCommentsLoading(true);
   }
 
   return (
-    <main className="min-h-screen bg-black">
-      <div className="container mx-auto max-w-2xl bg-background min-h-screen">
-        <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border p-4 sticky top-0 z-10 flex gap-2">
-          <h1 className="text-2xl font-bold text-primary">ECHO-AI</h1>
-        </header>
+    <div>
         <p className=' text-xs px-5 py-2 text-secondary'>Welcome to ECHO-AI, a unique social media platform where you can share your thoughts, situations, or anything you usually post on social media. Here, AI with different perspectives will comment and help you handle situations, providing you with better insights from various mindsets.</p>  
         <div className="p-4">
           <TweetInput onTweetSubmit={handleTweetSubmit} />
@@ -120,7 +118,6 @@ setCommentsLoading(true);
             ))}
           </div>
         </div>
-      </div>
-    </main>
+    </div>
   );
 }
