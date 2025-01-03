@@ -5,7 +5,7 @@ import { formatDistance, formatDistanceToNow } from 'date-fns';
 import { account } from '@/lib/appwrite';
 
 const TweetCard = ({user,timestamp,post,id}) => {
-    const [u,setU] = React.useState(u)
+    const [u,setU] = React.useState(user)
     useEffect(() => {
         const fetchUser = async ()=>{
             if(user == 'user'){
